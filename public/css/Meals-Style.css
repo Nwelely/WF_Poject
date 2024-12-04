@@ -1,0 +1,121 @@
+.title {
+  display: flex;
+  justify-content: center;
+  color: rgb(14, 170, 92);
+  font-size: 2.2em;
+  margin-bottom: 30px;
+  padding: 10px;
+  padding-top: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  width: 21.25em;
+  box-shadow: 0 5px 25px rgba(1, 1, 1, 0.15);
+  border-radius: 10px;
+  padding: 20px;
+  height: 400px; 
+  margin: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: left; 
+}
+
+.card:before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 128, 0, 0), rgba(4, 161, 4, 0.8));
+  transition: top 0.3s ease;
+  z-index: -1;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card:hover:before {
+  top: 0;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card h2 {
+  color: rgb(14, 170, 92);
+  margin-bottom: 10px;
+  text-align: center; 
+}
+
+.card p {
+  color: black;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.card ul {
+  color: black;
+  padding-left: 20px;
+}
+
+.card li {
+  color: rgb(20, 92, 56);
+  list-style-type: disc; 
+}
+
+
+
+
+
+
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: rgb(34, 34, 34);
+  color: rgb(214, 214, 214);
+}
+
+.dark-mode .title {
+  color: rgb(14, 170, 92);
+}
+
+.dark-mode .card {
+  background-color: rgb(34, 34, 34);
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  color: rgb(214, 214, 214);
+}
+
+.dark-mode .card:before {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(4, 161, 4, 0.8));
+}
+
+.dark-mode .card h2 {
+  color: rgb(14, 170, 92);
+}
+
+.dark-mode .card p {
+  color: rgb(214, 214, 214);
+}
+
+.dark-mode .card ul {
+  color: rgb(214, 214, 214);
+}
+
+.dark-mode .card li {
+  color: rgb(14, 170, 92);
+}

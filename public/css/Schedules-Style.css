@@ -1,0 +1,128 @@
+.schedule {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    overflow:hidden ;
+}
+
+#book-now-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(14, 170, 92);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#book-now-btn:hover {
+    border: solid  0.5px; 
+    background-color: rgb(255, 255, 255);
+    color: rgba(14, 170, 92, 0.8); 
+    transform: scale(1.05);
+}
+
+h1 {
+    color: rgb(14, 170, 92);
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 40px;
+}
+
+h2 {
+    color: rgb(14, 170, 92);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.schedule-table th, .schedule-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.schedule-table th {
+    background-color: #f2f2f2;
+}
+
+.schedule-table td {
+    background-color: #fafafa;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.no-underline {
+    text-decoration: none;
+}
+
+
+#special-link {
+    text-decoration: none;
+}
+
+
+@media screen and (max-width: 800px) {
+    .schedule {
+        max-width: calc(100% - 40px);
+        padding: 15px;
+    }
+   
+    
+    #book-now-btn {
+        margin-top: 10px;
+    }
+    
+    h1, h2 {
+        padding: 20px;
+    }
+}
+
+
+/* Dark Mode */
+.dark-mode .schedule {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode #book-now-btn {
+    background-color: rgb(50, 205, 50);
+    color: black;
+}
+
+.dark-mode #book-now-btn:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgba(50, 205, 50, 0.8);
+}
+
+.dark-mode h1, .dark-mode h2 {
+    color: rgb(50, 205, 50);
+}
+
+.dark-mode .schedule-table th {
+    background-color: #333;
+}
+
+.dark-mode .schedule-table td {
+    background-color: #444;
+    color: #ddd;
+}
+
+.dark-mode .schedule-table th, .dark-mode .schedule-table td {
+    border: 1px solid #555;
+}

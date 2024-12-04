@@ -1,0 +1,89 @@
+.title{
+    display: flex;
+    justify-content: center;
+    color: rgb(14, 170, 92);
+    font-size: 2.2em;
+    font-weight: 800;
+    padding: 10px;
+    padding-top: 30px;
+}
+
+.workouts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 20px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    overflow: hidden; 
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.5s ease; 
+}
+
+
+.workout-details {
+    padding: 20px;
+}
+
+.workout-details h2 {
+    margin-top: 0;
+    color: rgb(14, 170, 92);
+}
+
+.workout-details p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+
+
+
+
+/* Dark Mode */
+.dark-mode body {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  .dark-mode .title {
+    color: rgb(50, 205, 50);  
+  }
+  
+  .dark-mode .card {
+    background-color: #1e1e1e;
+    border: 2px solid #555;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  }
+  
+  .dark-mode .card:hover {
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+  }
+  
+  .dark-mode .card img {
+    filter: brightness(0.8); 
+  }
+  
+  .dark-mode .workout-details h2 {
+    color: rgb(50, 205, 50);  
+  }
+  
+  .dark-mode .workout-details p {
+    color: #bbb; 
+  }

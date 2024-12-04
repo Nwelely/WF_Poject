@@ -1,0 +1,94 @@
+.title{
+    display: flex;
+    justify-content: center;
+    color: rgb(14, 170, 92);
+    font-size: 2.2em;
+    font-weight: 800;
+    padding: 10px;
+    padding-top: 30px;
+}
+
+.workouts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.card {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin: 20px;
+    width: 300px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    overflow: hidden; 
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.5s ease; 
+}
+
+
+.workout-details {
+    padding: 20px;
+}
+
+.workout-details h2 {
+    margin-top: 0;
+    color: rgb(14, 170, 92);
+}
+
+.workout-details p {
+    margin-bottom: 0;
+    color: #666;
+}
+
+
+
+
+
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1f1f1f; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+.title.dark-mode {
+    color: rgb(14, 170, 92); /* Green text */
+}
+
+.card.dark-mode {
+    background-color: #333; /* Darker background */
+    border-color: #555; /* Darker border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Darker shadow */
+}
+
+.card.dark-mode:hover {
+    transform: translateY(-10px); /* Lift more on hover in dark mode */
+}
+
+.card img.dark-mode {
+    /* Adjust image styles for dark mode if necessary */
+}
+
+.workout-details.dark-mode {
+    /* Adjust workout details styles for dark mode */
+}
+
+.workout-details h2.dark-mode {
+    color: rgb(14, 170, 92); /* Green heading */
+}
+
+.workout-details p.dark-mode {
+    color: #ccc; /* Lighter text color for dark mode */
+}

@@ -1,0 +1,93 @@
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555;
+}
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+textarea {
+  resize: vertical;
+}
+input[type="submit"] {
+  font-size: 18px;
+  padding: 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(14, 170, 92);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ 
+}
+input[type="submit"]:hover {
+  border: solid  0.5px; 
+  background-color: rgb(255, 255, 255);
+  color: rgba(14, 170, 92, 0.8); 
+  transform: scale(1.05);
+}
+
+
+
+
+
+/* Dark Mode Styles */
+.dark-mode .container {
+  background-color: #333; /* Dark background */
+  color: #ccc; /* Light text */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); /* Light shadow */
+}
+
+.dark-mode h2 {
+  color: #fff; /* White text */
+}
+
+.dark-mode label {
+  color: #aaa; /* Medium-light text */
+}
+
+.dark-mode input[type="text"],
+.dark-mode input[type="email"],
+.dark-mode textarea {
+  background-color: #444; /* Darker background */
+  border: 1px solid #777; /* Medium border */
+  color: #ccc; /* Light text */
+}
+
+.dark-mode input[type="submit"] {
+  background-color: rgb(14, 170, 92); /* Green button */
+  color: rgb(255, 255, 255); /* White text */
+}
+
+.dark-mode input[type="submit"]:hover {
+  background-color: rgb(255, 255, 255); /* White background */
+  color: rgba(14, 170, 92, 0.8); /* Semi-transparent green text */
+}
+

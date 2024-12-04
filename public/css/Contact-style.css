@@ -1,0 +1,117 @@
+.title {
+  display: flex;
+  justify-content: center;
+  color: rgb(14, 170, 92);
+  font-size: 2.2em;
+  font-weight: 800;
+  margin-bottom: 30px;
+  padding: 30px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  width: 21.25em;
+  box-shadow: 0 5px 25px rgba(1, 1, 1, 0.15);
+  border-radius: 10px;
+  padding: 25px;
+  height: 300px;
+  margin: 15px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  text-align: center; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 128, 0, 0), rgba(4, 161, 4, 0.8));
+  transition: top 0.3s ease;
+  z-index: -1;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card:hover:before {
+  top: 0;
+}
+
+.card .icon {
+  color: rgb(14, 170, 92);
+  font-size: 8em;
+}
+
+.card h3 {
+  color: rgb(51, 51, 51);
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: rgb(102, 102, 102);
+  font-size: 1.1em;
+}
+
+.info p {
+  color: rgb(5, 118, 75);
+}
+
+.opencontact {
+  color: rgb(14, 170, 92);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #1f1f1f; /* Dark background */
+  color: #ffffff; /* White text */
+}
+
+body.dark-mode .title {
+  color: rgb(14, 170, 92); /* Green text */
+}
+
+body.dark-mode .card {
+  background-color: #333; /* Dark background */
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5); /* Darker shadow */
+}
+
+body.dark-mode .card:before {
+  background: linear-gradient(to bottom, rgba(0, 128, 0, 0), rgba(4, 161, 4, 0.8)); /* Green gradient */
+}
+
+body.dark-mode .card .icon {
+  color: rgb(14, 170, 92); /* Green text */
+}
+
+body.dark-mode .card h3 {
+  color: #ffffff; /* White text */
+}
+
+body.dark-mode .card p {
+  color: rgb(170, 170, 170); /* Light gray text */
+}
+
+body.dark-mode .info p {
+  color: rgb(5, 118, 75); /* Another shade of green */
+}
+
+body.dark-mode .opencontact {
+  color: rgb(14, 170, 92); /* Green text */
+}

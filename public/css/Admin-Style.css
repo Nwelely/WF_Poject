@@ -1,0 +1,159 @@
+/* Global Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+h1 {
+    color: #1e7e34;
+    margin-bottom: 20px;
+}
+
+/* Admin Panel Sidebar */
+#admin_Panel {
+    width: 250px;
+    height: 100vh;
+    background-color: #1e7e34;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    color: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#admin_Panel h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.admin-menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-menu .main-menu-button {
+    display: block;
+    text-decoration: none;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.admin-menu .main-menu-button:hover {
+    background-color: #218838;
+}
+
+/* Container for Content */
+.container {
+    margin-left: 270px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+}
+
+/* Action Container */
+.action-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #28a745;
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table a {
+    text-decoration: none;
+    color: #1e7e34;
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+table a:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* User Details Section */
+h3 {
+    font-size: 22px;
+    color: #1e7e34;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Forms */
+form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="number"],
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #218838;
+}
