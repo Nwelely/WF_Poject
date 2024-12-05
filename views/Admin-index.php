@@ -9,7 +9,9 @@
 <div id="admin_Panel">
         <h2>Admin Panel</h2>
         <ul class="admin-menu">
-            <li><a href="admin-index.php?action=view_all" class="main-menu-button">View All Users</a></li>
+            <li><a href="admin-index.php?action=view_all_users" class="main-menu-button">View All Users</a></li>
+            <li><a href="admin-index.php?action=view_all_products" class="main-menu-button">View All Products</a></li>
+            <li><a href="admin-index.php?action=add_product" class="main-menu-button">Add Product</a></li>
         </ul>
     </div>
 
@@ -19,6 +21,7 @@
 
     <?php
     include_once("../model/user.php");
+    include_once("../model/product.php");
     include_once("../config/DB.php");
 
     
@@ -29,7 +32,7 @@
     // Check which action to perform
     $action = $_GET['action'] ?? null;
 
-    if ($action === 'view_all') {
+    if ($action === 'view_all_users') {
         // Fetch and display all users
         $users = $user->getAllUsers();
         echo "<h3>All Users</h3>";
@@ -152,6 +155,124 @@
             echo $user->deleteUser($userId);
         } else {
             echo "No user ID provided.";
+        }
+    }
+
+    $product = new Product($conn);
+
+    if ($action === 'view_all_products') {
+        // Fetch and display all products
+        $products = $product->getAllProducts();
+        echo "<h3>All Products</h3>";
+        if (!empty($products)) {
+            echo "<table border='1'>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>";
+            foreach ($products as $u) {
+                echo "<tr>
+                        <td>{$u['id']}</td>
+                        <td>{$u['productname']}</td>
+                        <td>{$u['price']}</td>
+                        <td>{$u['quantity']}</td>
+                        <td>
+                            <a href='admin-index.php?action=view_product&id={$u['id']}'>View</a> |
+                            <a href='admin-index.php?action=edit_product&id={$u['id']}'>Edit</a> |
+                            <a href='admin-index.php?action=delete_product&id={$u['id']}'>Delete</a>
+                        </td>
+                    </tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "No products found.";
+        }
+    }elseif ($action === 'add_product') {
+        // Add product details
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Add product to the database
+            $productname = $_POST['productname'];
+            $price = $_POST['price'];
+            $quantity = $_POST['quantity'];
+    
+            // Call the addProduct method from the Product class
+            $result = $product->addProduct($productname, $price, $quantity);
+            echo $result;
+        } else {
+            // Display the add product form
+            echo "<h3>Add New Product</h3>";
+            echo "<form method='POST'>
+                    <label>Product Name:</label>
+                    <input type='text' name='productname' required><br>
+                    <label>Price:</label>
+                    <input type='number' step='0.01' name='price' required><br>
+                    <label>Quantity:</label>
+                    <input type='number' name='quantity' required><br>
+                    <button type='submit'>Add Product</button>
+                  </form>";
+        }
+    } elseif ($action === 'view_product') {
+        // View product details by ID
+        $productId = $_GET['id'] ?? null;
+        if ($productId) {
+            $productData = $product->getProductById($productId);
+            if ($productData) {
+                echo "<h3>Product Details</h3>";
+                echo "<p>ID: {$productData['id']}</p>";
+                echo "<p>Product Name: {$productData['productname']}</p>";
+                echo "<p>Price: {$productData['price']}</p>";
+                echo "<p>Quantity: {$productData['quantity']}</p>";
+            } else {
+                echo "Product not found.";
+            }
+        } else {
+            echo "No product ID provided.";
+        }
+    } elseif ($action === 'edit_product') {
+        // Edit product details (form and process)
+        $productId = $_GET['id'] ?? null;
+        if ($productId) {
+            $productData = $product->getProductById($productId);
+            if ($productData) {
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    // Update product
+                    $productname = $_POST['productname'];
+                    $price = $_POST['price'];
+                    $result = $product->updateProduct(
+                        $productId,
+                        $productname,
+                        $price,
+                        quantity: $quantity
+                    );
+                    echo $result;
+                } else {
+                    // Display edit form
+                    echo "<h3>Edit Product</h3>";
+                    echo "<form method='POST'>
+                            <label>Product Name:</label>
+                            <input type='text' name='productname' value='{$productData['productname']}' required><br>
+                            <label>Username:</label>
+                            <input type='number' name='price' value='{$productData['price']}' required><br>
+                            <input type='number' name='quantity' value='{$productData['quantity']}' required><br>
+                            <button type='submit'>Update</button>
+                          </form>";
+                }
+            } else {
+                echo "Product not found.";
+            }
+        } else {
+            echo "No product ID provided.";
+        }
+    } elseif ($action === 'delete_product') {
+        // Delete product
+        $productId = $_GET['id'] ?? null;
+        if ($productId) {
+            echo $product->deleteProduct($productId);
+        } else {
+            echo "No product ID provided.";
         }
     }
 
