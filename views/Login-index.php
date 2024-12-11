@@ -89,7 +89,7 @@ $conn->close();
                 <input type="password" id="password" name="password" required>
                 
                 <input type="submit" id="login-button" value="Login">
-                <input type="button" id="signup-button" onclick="window.location.href='/NEWWEbFIT_SW_PROJECT/views/SignUp-index.php';" value="Signup">
+                <input type="button" id="signup-button" onclick="window.location.href='/WF_Poject/views/SignUp-index.php';" value="Signup">
                 
                 <a href="/auth/reset-password.php" id="forgot-password">Forgot Password?</a>
             </form>

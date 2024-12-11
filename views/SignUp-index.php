@@ -10,6 +10,8 @@
 </head>
 
 <body>
+<?php include('partials/Navigation-Index.php'); ?>
+
     <?php
     // Enable error reporting for debugging
     error_reporting(E_ALL);

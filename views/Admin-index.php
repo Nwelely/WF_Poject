@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="../public/css/Admin-Style.css">
 </head>
 <body>
+<?php include('partials/Navigation-Index.php'); ?>
+
 <div id="admin_Panel">
     <h2>Admin Panel</h2>
     <ul class="admin-menu">
