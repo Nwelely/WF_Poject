@@ -2,29 +2,25 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
-
     <link rel="stylesheet" href="../public/css/Admin-Style.css">
 </head>
 <body>
 <div id="admin_Panel">
-        <h2>Admin Panel</h2>
-        <ul class="admin-menu">
-            <li><a href="admin-index.php?action=view_all_users" class="main-menu-button">View All Users</a></li>
-            <li><a href="admin-index.php?action=view_all_products" class="main-menu-button">View All Products</a></li>
-            <li><a href="admin-index.php?action=add_product" class="main-menu-button">Add Product</a></li>
-        </ul>
-    </div>
+    <h2>Admin Panel</h2>
+    <ul class="admin-menu">
+        <li><a href="admin-index.php?action=view_all_users" class="main-menu-button">View All Users</a></li>
+        <li><a href="admin-index.php?action=view_all_products" class="main-menu-button">View All Products</a></li>
+    </ul>
+</div>
 
-    <div class="container">
-        <h1>Admin Dashboard</h1>
-        <div class="action-container">
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div class="action-container">
 
     <?php
     include_once("../model/user.php");
     include_once("../model/product.php");
     include_once("../config/DB.php");
-
-    
 
     // Instantiate the User class
     $user = new User($conn);
@@ -59,9 +55,15 @@
                     </tr>";
             }
             echo "</table>";
-        } else {
+            // Add buttons for Add Admin and Add User
+            echo "<button onclick=\"window.location.href='SignUp-index.php?role=admin';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: left;'>Add Admin</button>";
+            echo "<button onclick=\"window.location.href='SignUp-index.php?role=user';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: right;'>Add User</button>";
+              } else {
             echo "No users found.";
-        }
+            // Add buttons for Add Admin and Add User
+            echo "<button onclick=\"window.location.href='SignUp-index.php?role=admin';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: left;'>Add Admin</button>";
+            echo "<button onclick=\"window.location.href='SignUp-index.php?role=user';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: right;'>Add User</button>";
+             }
     } elseif ($action === 'view_user') {
         // View user details by ID
         $userId = $_GET['id'] ?? null;
@@ -158,6 +160,7 @@
         }
     }
 
+    // Product handling
     $product = new Product($conn);
 
     if ($action === 'view_all_products') {
@@ -187,10 +190,11 @@
                     </tr>";
             }
             echo "</table>";
+            echo "<a href='admin-index.php?action=add_product' style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;'>Add Product</a>";
         } else {
             echo "No products found.";
         }
-    }elseif ($action === 'add_product') {
+    } elseif ($action === 'add_product') {
         // Add product details
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Add product to the database
@@ -201,7 +205,9 @@
             // Call the addProduct method from the Product class
             $result = $product->addProduct($productname, $price, $quantity);
             echo $result;
-        } else {
+        }
+    
+    else {
             // Display the add product form
             echo "<h3>Add New Product</h3>";
             echo "<form method='POST'>
