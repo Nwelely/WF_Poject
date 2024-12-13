@@ -20,17 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $username = sanitizeInput($_POST['username']);
     $password = sanitizeInput($_POST['password']);
 
-    // Check if the user exists
+    // Query to fetch user by username
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
     if (!$stmt) {
-        die("Prepare failed: " . $conn->error); // Outputs SQL error if any
+        die("Prepare failed: " . $conn->error);
     }
 
-    if (!$stmt->bind_param("s", $username)) {
-        die("Bind failed: " . $stmt->error);
-    }
-
+    $stmt->bind_param("s", $username);
     if (!$stmt->execute()) {
         die("Execute failed: " . $stmt->error);
     }
@@ -38,13 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        // Verify the password
         if (password_verify($password, $user['userpassword'])) {
             // Successful login
-            $_SESSION['user'] = $user;
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'fullname' => $user['fullname'],
+                'useremail' => $user['useremail'],  // Storing email in session
+                'address' => $user['address'],      // Storing address in session
+                'gender' => $user['gender'],        // Storing gender in session
+                'age' => $user['age'],              // Storing age in session
+                'userphone' => $user['userphone'],  // Storing phone in session
+                'role' => $user['role'] ?? 'user',  // Default to 'user' if role is not set
+            ];
             $_SESSION['isLoggedIn'] = true;
-            $_SESSION['isAdmin'] = $user['role'];
 
-            header("Location: index.php");
+            // Redirect to homepage or profile page
+            header("Location: http://localhost/WF_Poject/views/index.php");
             exit();
         } else {
             $loginError = "Invalid username or password."; // Invalid password
@@ -79,7 +87,7 @@ $conn->close();
                 <p style="color: red;"><?php echo $loginError; ?></p>
             <?php endif; ?>
 
-            <form id="login-form"  method="post">
+            <form id="login-form" method="post">
                 <input type="hidden" name="action" value="login"> <!-- Hidden field for action -->
                 
                 <label for="username">Username:</label>
@@ -89,9 +97,9 @@ $conn->close();
                 <input type="password" id="password" name="password" required>
                 
                 <input type="submit" id="login-button" value="Login">
-                <input type="button" id="signup-button" onclick="window.location.href='/WF_Poject/views/SignUp-index.php';" value="Signup">
+                <input type="button" id="signup-button" onclick="window.location.href='http://localhost/WF_Poject/views/SignUp-index.php';" value="Signup">
                 
-                <a href="/auth/reset-password.php" id="forgot-password">Forgot Password?</a>
+                <a href="http://localhost/WF_Poject/views/reset-password.php" id="forgot-password">Forgot Password?</a>
             </form>
         </div>
     </div>
