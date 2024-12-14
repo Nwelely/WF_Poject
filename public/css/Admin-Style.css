@@ -8,10 +8,14 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    color: #333; /* Default text color */
+}
+
+p {
     color: #333;
 }
 
-h1, h2 {
+h1, h2, h3 {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
 }
@@ -19,7 +23,14 @@ h1, h2 {
 h1 {
     color: #1e7e34;
     margin-bottom: 20px;
-}/* Admin Panel Sidebar */
+}
+
+h3 {
+    color: #1e7e34;
+    margin-bottom: 15px;
+}
+
+/* Admin Panel Sidebar */
 #admin_Panel {
     width: 250px;
     height: 100vh;
@@ -29,30 +40,24 @@ h1 {
     left: 0;
     padding: 20px;
     color: white;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;  /* Ensure space is distributed */
+    justify-content: space-between;
 }
 
 #admin_Panel h2 {
-    font-size: 24px;
-    margin-bottom: 40px;
     text-align: center;
+    margin-bottom: 40px;
 }
 
-/* Admin Menu */
 .admin-menu {
-    display: flex;
-    flex-direction: column;  /* Arrange buttons vertically */
-    flex-grow: 1;  /* Take up all available vertical space */
-    justify-content: space-between;  /* Ensure the buttons are spaced evenly */
+    list-style: none;
 }
 
 .admin-menu .main-menu-button {
     display: block;
     text-decoration: none;
-    padding: 12px 15px;
+    padding: 10px 15px;
     margin: 10px 0;
     border-radius: 5px;
     background-color: #28a745;
@@ -65,29 +70,7 @@ h1 {
     background-color: #218838;
 }
 
-.admin-menu .users-section,
-.admin-menu .products-section {
-    flex-grow: 1;  /* Allow sections to take more space */
-}
-
-/* Add Product Button */
-.add-product-button {
-    display: block;
-    text-decoration: none;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    background-color: #28a745;
-    color: white;
-    text-align: center;
-    transition: background-color 0.3s ease;
-}
-
-.add-product-button:hover {
-    background-color: #218838;
-}
-
-/* Container for Content */
+/* Content Container */
 .container {
     margin-left: 270px;
     padding: 20px;
@@ -95,9 +78,9 @@ h1 {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     min-height: 100vh;
+    color: #333; /* Ensure container text is black */
 }
 
-/* Action Container */
 .action-container {
     background-color: #f9f9f9;
     padding: 20px;
@@ -105,10 +88,32 @@ h1 {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Form Styling */
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333; /* Ensure form labels are black */
+}
+
+form input, form select, form textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333; /* Ensure form input text is black */
+}
+
+/* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -116,11 +121,16 @@ table th, table td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    color: #333; /* Ensure table text is black */
 }
 
 table th {
     background-color: #28a745;
-    color: white;
+    color: white; /* Keep header text white */
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
 table tr:hover {
@@ -130,56 +140,27 @@ table tr:hover {
 table a {
     text-decoration: none;
     color: #1e7e34;
-    padding: 4px 8px;
-    border-radius: 5px;
 }
 
 table a:hover {
-    background-color: #28a745;
-    color: white;
+    color: #218838;
+    font-weight: bold;
 }
 
-/* User Details Section */
-h3 {
-    font-size: 22px;
-    color: #1e7e34;
-    margin-bottom: 20px;
-}
-
-p {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
-/* Forms */
-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-form input[type="text"],
-form input[type="email"],
-form input[type="number"],
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-form button {
-    background-color: #28a745;
-    color: white;
+/* Buttons */
+button, .add-product-button {
+    display: inline-block;
     padding: 10px 15px;
+    margin: 10px 5px 0 0;
+    background-color: #28a745;
+    color: white;
     border: none;
     border-radius: 5px;
+    text-align: center;
     cursor: pointer;
-    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-form button:hover {
+button:hover, .add-product-button:hover {
     background-color: #218838;
 }
