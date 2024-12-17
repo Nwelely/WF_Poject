@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="<?php echo isset($lang) ? $lang : 'en'; ?>">
 <head>
@@ -21,13 +19,22 @@
       <a href="http://localhost/WF_Poject/views/Contact-Form-index.php">Contact</a>
       <a href="http://localhost/WF_Poject/views/plans-index.php">Join Us</a>
 
-      <?php if (isset($_SESSION['user'])) { ?>
-        <!-- If user is logged in -->
-        <a id="profile-link" href="http://localhost/WF_Poject/views/Profile.php">My Profile</a>
-        <a id="logout-link" href="http://localhost/WF_Poject/views/logout.php">Logout</a>
+      <?php 
+      // If user is logged in and role is admin, hide login and signup links
+      if (isset($_SESSION['user'])) { 
+        if ($_SESSION['user']['role'] === 'admin') { ?>
+          <!-- Admin Dashboard link, no profile for admin -->
+          <a id="admin-link" href="http://localhost/WF_Poject/views/Admin-index.php">Admin Dashboard</a>
+          <a id="logout-link" href="http://localhost/WF_Poject/views/logout.php">Logout</a>
+        <?php } else { ?>
+          <!-- If user is a regular user -->
+          <a id="profile-link" href="http://localhost/WF_Poject/views/Profile.php">My Profile</a>
+          <a id="logout-link" href="http://localhost/WF_Poject/views/logout.php">Logout</a>
+        <?php } ?>
       <?php } else { ?>
-        <!-- If user is not logged in -->
+        <!-- If user is not logged in, show login and signup links -->
         <a id="login-link" href="http://localhost/WF_Poject/views/Login-index.php">Login</a>
+        <a id="signup-link" href="http://localhost/WF_Poject/views/SignUp-index.php">Signup</a>
       <?php } ?>
     </nav>
   </div>

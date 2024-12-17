@@ -13,7 +13,7 @@ include '../config/DB.php'; // Adjust the path accordingly
 function sanitizeInput($data) {
     global $conn;
     return $data !== null ? mysqli_real_escape_string($conn, trim($data)) : '';
-} 
+}
 
 // Handle the login process
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'login') {
@@ -51,8 +51,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             ];
             $_SESSION['isLoggedIn'] = true;
 
-            // Redirect to homepage or profile page
-            header("Location: http://localhost/WF_Poject/views/index.php");
+            // Redirect to homepage or profile page based on the role
+            if ($user['role'] === 'admin') {
+                header("Location: http://localhost/WF_Poject/views/Admin-index.php"); // Redirect to Admin Dashboard
+            } else {
+                header("Location: http://localhost/WF_Poject/views/index.php"); // Redirect to normal user homepage
+            }
             exit();
         } else {
             $loginError = "Invalid username or password."; // Invalid password
@@ -74,7 +78,6 @@ $conn->close();
     <title>Login</title>
     <link rel="stylesheet" href="../public/css/Login-Style.css">
 </head>
-
 <body>
     <?php include('partials/Navigation-Index.php'); ?>
 
