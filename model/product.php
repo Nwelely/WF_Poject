@@ -50,11 +50,13 @@ class Product {
 
     // UPDATE: Update product details
     public function updateProduct($id, $productname, $price, $quantity) {
-        $sql = "UPDATE products SET productname = ?, price = ?, quantity = ?
-                WHERE id = ?";
+        // Correct SQL query with 4 placeholders
+        $sql = "UPDATE products SET productname = ?, price = ?, quantity = ? WHERE id = ?";
+        
         $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssssssisssi", $productname, $id, $price, $quantity);
-
+        
+        $stmt->bind_param("sssi", $productname, $price, $quantity, $id);
+    
         if ($stmt->execute()) {
             return "Product updated successfully.";
         } else {
