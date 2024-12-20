@@ -48,18 +48,37 @@ class User {
     }
 
     // UPDATE: Update user details
-    public function updateUser($id, $fullname, $username, $userpassword, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription) {
-        $sql = "UPDATE users SET fullname = ?, username = ?, userpassword = ?, userphone = ?, useremail = ?, role = ?, gender = ?, age = ?, address = ?, img = ?, subscription = ? 
-                WHERE id = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssssssisssi", $fullname, $username, $userpassword, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription, $id);
+    // UPDATE: Update user details
+public function updateUser($id, $fullname, $username, $userpassword, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription) {
+    // Start with the base query
+    $sql = "UPDATE users SET fullname = ?, username = ?, userphone = ?, useremail = ?, role = ?, gender = ?, age = ?, address = ?, img = ?, subscription = ?";
 
-        if ($stmt->execute()) {
-            return "User updated successfully.";
-        } else {
-            return "Error: " . $stmt->error;
-        }
+    // Check if a new password is provided
+    if (!empty($userpassword)) {
+        $sql .= ", userpassword = ?";
     }
+
+    // Complete the query with the WHERE clause
+    $sql .= " WHERE id = ?";
+
+    // Prepare the statement
+    $stmt = $this->conn->prepare($sql);
+
+    // Bind parameters based on whether the password is updated
+    if (!empty($userpassword)) {
+        $stmt->bind_param("sssssssisssi", $fullname, $username, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription, $userpassword, $id);
+    } else {
+        $stmt->bind_param("ssssssisssi", $fullname, $username, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription, $id);
+    }
+
+    // Execute and return the result
+    if ($stmt->execute()) {
+        return "User updated successfully.";
+    } else {
+        return "Error: " . $stmt->error;
+    }
+}
+
 
     // DELETE: Delete a user
     public function deleteUser($id) {

@@ -1,13 +1,6 @@
 <?php
 session_start();
 
-// Check if user is logged in and has the role 'admin'
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    header("Location: Login-index.php"); // Redirect to login if not admin
-    exit();
-}
-
-include_once("../model/user.php");
 include_once("../model/product.php");
 include_once("../config/DB.php");
 
