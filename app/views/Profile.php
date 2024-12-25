@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require_once '../Controllers/UserProfileController.php';
+require_once '../DB/DB.php';
 // Redirect if user is not logged in
 if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
     header("Location: /WF_Poject/views/login-index.php");
@@ -21,7 +22,7 @@ $imagePath = isset($user['img']) && !empty($user['img']) && file_exists('../uplo
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile</title>
-  <link rel="stylesheet" href="../public/css/Profile-Styles.css">
+  <link rel="stylesheet" href="../../public/css/Profile-Styles.css">
 </head>
 <body>
   <!-- Include Navigation -->
@@ -74,6 +75,6 @@ $imagePath = isset($user['img']) && !empty($user['img']) && file_exists('../uplo
     <button id="deleteAccountButton" class="hidden" style="background-color: red;">Delete Account</button>
   </div>
 
-  <script src="../public/js/Profile-JavaScript.js"></script>
+  <script src="../../public/js/Profile-JavaScript.js"></script>
 </body>
 </html>

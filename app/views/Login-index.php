@@ -7,7 +7,7 @@ ob_start(); // Start output buffering
 session_start();
 
 // Include database connection file
-include '../config/DB.php'; // Adjust the path accordingly
+require_once '../DB/DB.php';// Adjust the path accordingly
 
 // Sanitize input function
 function sanitizeInput($data) {
@@ -53,9 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
             // Redirect to homepage or profile page based on the role
             if ($user['role'] === 'admin') {
-                header("Location: http://localhost/WF_Poject/views/Admin-index.php"); // Redirect to Admin Dashboard
+                header("Location: http://localhost/WF_Poject/app/views/Admin-index.php"); // Redirect to Admin Dashboard
             } else {
-                header("Location: http://localhost/WF_Poject/views/index.php"); // Redirect to normal user homepage
+                header("Location: http://localhost/WF_Poject/app/views/index.php"); // Redirect to normal user homepage
             }
             exit();
         } else {
@@ -76,7 +76,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../public/css/Login-Style.css">
+    <link rel="stylesheet" href="../../public/css/Login-Style.css">
 </head>
 <body>
     <?php include('partials/Navigation-Index.php'); ?>
@@ -100,13 +100,13 @@ $conn->close();
                 <input type="password" id="password" name="password" required>
                 
                 <input type="submit" id="login-button" value="Login">
-                <input type="button" id="signup-button" onclick="window.location.href='http://localhost/WF_Poject/views/SignUp-index.php';" value="Signup">
+                <input type="button" id="signup-button" onclick="window.location.href='http://localhost/WF_Poject/app/views/SignUp-index.php';" value="Signup">
                 
-                <a href="http://localhost/WF_Poject/views/reset-password.php" id="forgot-password">Forgot Password?</a>
+                <a href="http://localhost/WF_Poject/app/views/reset-password.php" id="forgot-password">Forgot Password?</a>
             </form>
         </div>
     </div>
 
-    <script src="../public/js/Login-JavaScript.js"></script>
+    <script src="../../public/js/Login-JavaScript.js"></script>
 </body>
 </html>

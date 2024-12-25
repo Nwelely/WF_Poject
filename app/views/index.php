@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nutrition, Gym, and Supplements</title>
 
-  <link rel="stylesheet" href="../public/css/Home-Style.css">
+  <link rel="stylesheet" href="../../public/css/Home-Style.css">
 </head>
 
 <?php 
 session_start(); // Start the session
-include '../config/DB.php'; // Include your database connection
+include '../DB/DB.php'; // Include your database connection
 ?>
 
 <body>
@@ -103,7 +103,7 @@ include '../config/DB.php'; // Include your database connection
       </div>
     </section>
 
-    <script src="../public/js/Home-JavaScript.js"></script>
+    <script src="../../public/js/Home-JavaScript.js"></script>
 </body>
 
 </html>

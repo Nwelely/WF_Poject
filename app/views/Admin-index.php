@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+require_once '../Controllers/AdminController.php';
+require_once '../DB/DB.php';
 // Check if user is logged in and has the role 'admin'
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
     header("Location: Login-index.php"); // Redirect to login if not admin
@@ -9,7 +10,7 @@ if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
 
 include_once("../model/user.php");
 include_once("../model/product.php");
-include_once("../config/DB.php");
+
 
 $user = new User($conn);
 $product = new Product($conn);
@@ -21,7 +22,7 @@ $action = $_GET['action'] ?? null;
 <html>
 <head>
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../public/css/Admin-Style.css">
+    <link rel="stylesheet" href="../../public/css/Admin-Style.css">
 </head>
 <body>
     <?php include('partials/Navigation-Index.php'); ?>

@@ -5,30 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="../public/css/Login-Style.css">
-    <link rel="stylesheet" href="../public/css/Signup-Style.css"> <!-- Link to the new CSS file -->
+    <link rel="stylesheet" href="../../public/css/Login-Style.css">
+    <link rel="stylesheet" href="../../public/css/Signup-Style.css"> <!-- Link to the new CSS file -->
+    
 </head>
 
 <body>
     <?php
+    require_once '../Controllers/SignupController.php';
+    require_once '../DB/DB.php';
       include('partials/Navigation-Index.php'); 
     // Enable error reporting for debugging
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
     // Database connection details
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "sw_project";
-
-    // Create connection to the database
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check if the connection is successful
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+  
 
     // Function to sanitize user input
     function sanitizeInput($data) {
@@ -98,7 +90,7 @@
 
             // Execute the query and check if the insertion is successful
             if ($conn->query($sql) === TRUE) {
-                header("Location: http://localhost/WF_Poject/views/Login-index.php"); // Redirect to login page after successful signup
+                header("Location: http://localhost/WF_Poject/app/views/Login-index.php"); // Redirect to login page after successful signup
                 exit();
             } else {
                 $validationMessage = "<div class='validation-message'>Error: " . $conn->error . "</div>";
@@ -172,11 +164,11 @@
             </div>
 
             <button type="submit" name="signup" class="signup-container-button">Signup</button>
-            <button type="button" class="back-to-login" onclick="window.location.href='http://localhost/WF_Poject/views/Login-index.php';">Back to Login</button>
+            <button type="button" class="back-to-login" onclick="window.location.href='http://localhost/WF_Poject/app/views/Login-index.php';">Back to Login</button>
         </form>
     </div>
 
-    <script src="../public/js/Login-JavaScript.js"></script>
+    <script src="../../public/js/Login-JavaScript.js"></script>
 </body>
 
 </html>

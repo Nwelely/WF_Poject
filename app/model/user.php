@@ -1,4 +1,6 @@
 <?php
+session_start(); 
+require_once __DIR__ . '/model.php';
 class User {
     private $conn;
 
@@ -17,10 +19,7 @@ class User {
     private $subscription;
 
     // Constructor to initialize the database connection
-    public function __construct($conn) {
-        $this->conn = $conn;
-    }
-
+  
     // CREATE: Add a new user
    
     
@@ -103,5 +102,5 @@ public function updateUser($id, $fullname, $username, $userpassword, $userphone,
 
 
  
-
+$conn->close();
 ?>
