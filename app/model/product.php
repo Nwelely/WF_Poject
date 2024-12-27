@@ -3,15 +3,9 @@ require_once __DIR__ . '/model.php';
 class Product {
     private $conn;
 
-    // Properties
-    private $id;
-    private $productname;
-    private $price;
-    private $quantity;
-
     // Constructor to initialize the database connection
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct($dbConnection) {
+        $this->conn = $dbConnection;
     }
 
     // CREATE: Add a new product
@@ -19,9 +13,9 @@ class Product {
         $sql = "INSERT INTO products (productname, price, quantity) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("sdi", $productname, $price, $quantity);
-    
+
         if ($stmt->execute()) {
-            return "Product added successfully.";
+            return true;
         } else {
             return "Error: " . $stmt->error;
         }
@@ -32,10 +26,15 @@ class Product {
         $sql = "SELECT * FROM products";
         $result = $this->conn->query($sql);
 
+        if (!$result) {
+            return "Error: " . $this->conn->error;
+        }
+
         $products = [];
         while ($row = $result->fetch_assoc()) {
             $products[] = $row;
         }
+
         return $products;
     }
 
@@ -46,20 +45,22 @@ class Product {
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        return $result->fetch_assoc();
+
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return "No product found with ID: $id";
+        }
     }
 
     // UPDATE: Update product details
     public function updateProduct($id, $productname, $price, $quantity) {
-        // Correct SQL query with 4 placeholders
         $sql = "UPDATE products SET productname = ?, price = ?, quantity = ? WHERE id = ?";
-        
         $stmt = $this->conn->prepare($sql);
-        
-        $stmt->bind_param("sssi", $productname, $price, $quantity, $id);
-    
+        $stmt->bind_param("sdii", $productname, $price, $quantity, $id);
+
         if ($stmt->execute()) {
-            return "Product updated successfully.";
+            return true;
         } else {
             return "Error: " . $stmt->error;
         }
@@ -72,21 +73,11 @@ class Product {
         $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
-            return "Product deleted successfully.";
+            return true;
         } else {
             return "Error: " . $stmt->error;
         }
     }
-
-    // Destructor to close the database connection
-    public function __destruct() {
-        // The connection is closed in the script that created this object.
-    }
 }
-
-// Example usage
-
-
- 
 
 ?>
