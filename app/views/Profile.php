@@ -12,7 +12,7 @@ $user = $_SESSION['user'];
 // Determine the profile image path
 $imagePath = isset($user['img']) && !empty($user['img']) && file_exists('../uploads/' . $user['img'])
     ? '../uploads/' . $user['img']
-    : '../public/images/default-profile.jpg';
+    : '../../public/uploads/PP.jpg';
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ $imagePath = isset($user['img']) && !empty($user['img']) && file_exists('../uplo
   <div class="profile-container" data-user-id="<?php echo htmlspecialchars($user['id']); ?>">
     <!-- Profile Image -->
     <div class="profile-image-container">
-      <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="Profile Picture" class="profile-image" id="profileImage">
+        <img src="<?php echo htmlspecialchars($imagePath); ?>" alt="Profile Picture" class="profile-image" id="profileImage">
     </div>
 
     <!-- User Details -->

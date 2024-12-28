@@ -6,38 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="stylesheet" href="../../public/css/Login-Style.css">
-    <link rel="stylesheet" href="../../public/css/Signup-Style.css"> <!-- Link to the new CSS file -->
-    
+    <link rel="stylesheet" href="../../public/css/Signup-Style.css">
 </head>
 
 <body>
     <?php
     require_once '../Controllers/SignupController.php';
     require_once '../DB/DB.php';
-      include('partials/Navigation-Index.php'); 
+    include('partials/Navigation-Index.php');
+
     // Enable error reporting for debugging
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-    // Database connection details
-  
-
     // Function to sanitize user input
-    function sanitizeInput($data) {
+    function sanitizeInput($data)
+    {
         global $conn;
-        return $data !== null ? mysqli_real_escape_string($conn, trim($data)) : '';
+        return $data !== null ? htmlspecialchars(mysqli_real_escape_string($conn, trim($data))) : '';
     }
 
     // Variable to hold validation messages
     $validationMessage = "";
 
     // Check if the form is submitted
-    if (isset($_POST['signup'])) {
-        // Debugging: Output the posted data
-        // echo "<pre>";
-        // print_r($_POST);
-        // echo "</pre>";
-
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signup'])) {
         $fullname = sanitizeInput($_POST['fullname']);
         $username = sanitizeInput($_POST['username']);
         $userpassword = sanitizeInput($_POST['userpassword']);
@@ -63,39 +56,64 @@
             mkdir($targetDir, 0755, true);
         }
 
-        // Check if an image file is uploaded and move it to the target directory
-        if (isset($_FILES['img']) && $_FILES['img']['error'] == 0) {
-            $img = $targetDir . basename($_FILES["img"]["name"]);
-            if (!move_uploaded_file($_FILES["img"]["tmp_name"], $img)) {
-                $validationMessage = "<div class='validation-message'>Failed to upload image.</div>";
+        if (isset($_FILES['img']) && $_FILES['img']['error'] === 0) {
+            $imgPath = $targetDir . basename($_FILES['img']['name']);
+            $fileType = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
+
+            // Validate file type (allow only images)
+            $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+            if (!in_array($fileType, $allowedTypes)) {
+                $validationMessage = "<div class='validation-message'>Invalid image file type. Only JPG, JPEG, PNG, and GIF are allowed.</div>";
+            } else {
+                if (!move_uploaded_file($_FILES['img']['tmp_name'], $imgPath)) {
+                    $validationMessage = "<div class='validation-message'>Failed to upload image.</div>";
+                } else {
+                    $img = $imgPath;
+                }
             }
         }
 
         // Check if the user already exists in the database
-        $checkUser = "SELECT * FROM users WHERE username='$username' OR useremail='$useremail' OR userphone='$userphone'";
-        $result = $conn->query($checkUser);
+        if (empty($validationMessage)) {
+            $checkUser = "SELECT * FROM users WHERE username=? OR useremail=? OR userphone=?";
+            $stmt = $conn->prepare($checkUser);
+            $stmt->bind_param("sss", $username, $useremail, $userphone);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $validationMessage = "<div class='validation-message'>User already exists.</div>";
-            if ($img) {
-                unlink($img); // Remove uploaded image if user exists
-            }
-        } else if (empty($validationMessage)) { // Proceed only if no validation messages
-            // Hash the password before storing it
-            $hashedPassword = password_hash($userpassword, PASSWORD_DEFAULT);
-
-            // Insert user data into the database
-            $sql = "INSERT INTO users (fullname, username, userpassword, userphone, useremail, role, gender, age, address, img, subscription)
-                    VALUES ('$fullname', '$username', '$hashedPassword', '$userphone', '$useremail', '$role', '$gender', '$age', '$address', '$img', '$subscription')";
-
-            // Execute the query and check if the insertion is successful
-            if ($conn->query($sql) === TRUE) {
-                header("Location: http://localhost/WF_Poject/app/views/Login-index.php"); // Redirect to login page after successful signup
-                exit();
-            } else {
-                $validationMessage = "<div class='validation-message'>Error: " . $conn->error . "</div>";
+            if ($result->num_rows > 0) {
+                $validationMessage = "<div class='validation-message'>User already exists.</div>";
                 if ($img) {
-                    unlink($img); // Remove the uploaded image if there's an error
+                    unlink($img); // Remove uploaded image if user exists
+                }
+            } else {
+                // Hash the password before storing it
+                $hashedPassword = password_hash($userpassword, PASSWORD_DEFAULT);
+
+                // Insert user data into the database
+                $sql = "INSERT INTO users (fullname, username, userpassword, userphone, useremail, role, gender, age, address, img, subscription) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssssssisss", $fullname, $username, $hashedPassword, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription);
+
+                if ($stmt->execute()) {
+                    // Get the ID of the newly inserted user
+                    $user_id = $stmt->insert_id;
+
+                    // Create a cart for the new user
+                    $cart_sql = "INSERT INTO carts (user_id) VALUES (?)";
+                    $cart_stmt = $conn->prepare($cart_sql);
+                    $cart_stmt->bind_param("i", $user_id);
+                    $cart_stmt->execute();
+
+                    // Redirect to login page after successful signup
+                    header("Location: http://localhost/WF_Poject/app/views/Login-index.php");
+                    exit();
+                } else {
+                    $validationMessage = "<div class='validation-message'>Error: " . $conn->error . "</div>";
+                    if ($img) {
+                        unlink($img); // Remove the uploaded image if there's an error
+                    }
                 }
             }
         }
@@ -112,54 +130,54 @@
             <div class="row">
                 <div class="left-column">
                     <label for="signup-fullname">Full Name:</label>
-                    <input type="text" id="signup-fullname" name="fullname" required><br />
+                    <input type="text" id="signup-fullname" name="fullname" required>
 
                     <label for="signup-username">Username:</label>
-                    <input type="text" id="signup-username" name="username" required><br />
+                    <input type="text" id="signup-username" name="username" required>
 
                     <label for="signup-phone">Phone:</label>
-                    <input type="text" id="signup-phone" name="userphone" required><br />
+                    <input type="text" id="signup-phone" name="userphone" required>
 
                     <label for="signup-password">Password:</label>
-                    <input type="password" id="signup-password" name="userpassword" required><br />
+                    <input type="password" id="signup-password" name="userpassword" required>
 
                     <label for="signup-address">Address:</label>
-                    <input type="text" id="signup-address" name="address" required><br />
+                    <input type="text" id="signup-address" name="address" required>
 
                     <label for="signup-role">Role:</label>
                     <select id="signup-role" name="role" required>
                         <option value="">Select</option>
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
-                    </select><br />
+                    </select>
                 </div>
 
                 <div class="right-column">
                     <label for="signup-email">Email:</label>
-                    <input type="email" id="signup-email" name="useremail" required><br />
+                    <input type="email" id="signup-email" name="useremail" required>
 
                     <label for="signup-age">Age:</label>
-                    <input type="number" id="signup-age" name="age" required><br />
+                    <input type="number" id="signup-age" name="age" required>
 
                     <label for="signup-gender">Gender:</label>
                     <select id="signup-gender" name="gender" required>
                         <option value="">Select</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
-                    </select><br />
+                    </select>
 
                     <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required><br />
+                    <input type="password" id="confirm-password" name="confirm-password" required>
 
                     <label for="signup-img">Profile Image:</label>
-                    <input type="file" id="signup-img" name="img" accept="image/*"><br />
+                    <input type="file" id="signup-img" name="img" accept="image/*">
 
                     <label for="signup-subscription">Subscription:</label>
                     <select id="signup-subscription" name="subscription" required>
                         <option value="">Select</option>
                         <option value="free">Free</option>
                         <option value="premium">Premium</option>
-                    </select><br />
+                    </select>
                 </div>
             </div>
 
