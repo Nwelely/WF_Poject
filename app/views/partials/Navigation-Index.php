@@ -14,9 +14,9 @@
     <nav class="nav-container">
       <!-- Static links -->
       <a href="http://localhost/WF_Poject/app/views/index.php">Home</a>
-      <a href="http://localhost/WF_Poject/app/views/about-index.php">About Us</a>
+      <a href="http://localhost/WF_Poject/app/views/AboutUs-index.php">About Us</a>
       <a href="http://localhost/WF_Poject/app/views/shop.php">Shop</a>
-      <a href="http://localhost/WF_Poject/app/views/Contact-Form-index.php">Contact</a>
+      <a href="http://localhost/WF_Poject/app/views/contact.php">Contact</a>
       <a href="http://localhost/WF_Poject/app/views/plans-index.php">Join Us</a>
 
       <?php 
