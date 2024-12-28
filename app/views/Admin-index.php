@@ -181,8 +181,18 @@ $action = $_GET['action'] ?? null;
                         </tr>";
                 }
                 echo "</table>";
+                echo"</div>
+            <ul class='admin-menu'>
+        <li><a href='admin-index.php?action=add_product' class='main-menu-button' id='add-product-btn'>Add Product</a></li>
+    </ul>
+    </div>";
             } else {
                 echo "No products found.";
+                echo "</div>
+            <ul class='admin-menu'>
+        <li><a href='admin-index.php?action=add_product' class='main-menu-button' id='add-product-btn'>Add Product</a></li>
+    </ul>
+    </div>";
             }
         }elseif ($action === 'add_product') {
             // Add product details
@@ -274,11 +284,5 @@ $action = $_GET['action'] ?? null;
     
         $conn->close();
         ?>
-            </div>
-            <ul class="admin-menu">
-        <li><a href="admin-index.php?action=add_product" class="main-menu-button" id="add-product-btn">Add Product</a></li>
-    </ul>
-    
-    </div>
 </body>
 </html>
