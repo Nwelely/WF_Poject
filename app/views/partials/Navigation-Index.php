@@ -17,7 +17,7 @@
       <a href="http://localhost/WF_Poject/app/views/AboutUs-index.php">About Us</a>
       <a href="http://localhost/WF_Poject/app/views/shop.php">Shop</a>
       <a href="http://localhost/WF_Poject/app/views/contact.php">Contact</a>
-      <a href="http://localhost/WF_Poject/app/views/plans-index.php">Join Us</a>
+      <a href="http://localhost/WF_Poject/app/views/joinus.php">Join Us</a>
 
       <?php 
       // If user is logged in and role is admin, hide login and signup links
