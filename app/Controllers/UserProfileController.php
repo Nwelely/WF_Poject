@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__ . '/../model/user.php'; // Adjust the path as per your directory structure
-require_once __DIR__ . '/../DB/DB.php'; // Include the database connection file
+require_once __DIR__ . '/../model/user.php';
+require_once __DIR__ . '/../DB/DB.php';
 
-// Initialize the User model
+
 
 $userModel = new User($conn);
 
@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $age = !empty($_POST['age']) ? $_POST['age'] : $_SESSION['user']['age'];
     $userphone = !empty($_POST['userphone']) ? $_POST['userphone'] : $_SESSION['user']['userphone'];
     $password = !empty($_POST['password']) ? $_POST['password'] : null;
-    $img = $_SESSION['user']['img'] ?? ''; // Assuming no image update
-    $subscription = $_SESSION['user']['subscription'] ?? ''; // Assuming subscription is unchanged
-    $role = $_SESSION['user']['role'] ?? ''; // Assuming role is unchanged
+    $img = $_SESSION['user']['img'] ?? '';
+    $subscription = $_SESSION['user']['subscription'] ?? '';
+    $role = $_SESSION['user']['role'] ?? '';
 
     // Handle file upload for profile image (if required)
     if (isset($_FILES['profile_image']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadFile = $uploadDir . basename($_FILES['profile_image']['name']);
 
         if (move_uploaded_file($_FILES['profile_image']['tmp_name'], $uploadFile)) {
-            $img = $_FILES['profile_image']['name']; // Save the new image file name
+            $img = $_FILES['profile_image']['name'];
         }
     }
 
