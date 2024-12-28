@@ -24,7 +24,7 @@ $products = $product->getAllProducts();
 <?php include('partials/Navigation-Index.php'); ?>
   <header>
     <h1>WEB-FIT</h1>
-    <div class="cart-info">
+    <div class="cart-info" id="cartinfo">
       <span class="cart-count">0</span> items
       <div id="cart-Btn"><i class="fas fa-shopping-cart"></i></div>
     </div>

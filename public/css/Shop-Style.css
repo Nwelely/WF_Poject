@@ -72,7 +72,6 @@ button:hover {
   border: solid  0.5px; 
   background-color: rgb(255, 255, 255);
   color: rgba(14, 170, 92, 0.8); 
-  transform: scale(1.05);
 }
 
 .cart-info {
