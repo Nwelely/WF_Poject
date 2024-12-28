@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";  // Make sure it's 'localhost' if you're using XAMPP
-$username = "root";         // Default XAMPP MySQL user is 'root'
-$password = "";             // No password for 'root' by default in XAMPP
-$dbname = "sw_project";        // Ensure the database 'project' exists in your MySQL
+$servername = "localhost";  
+$username = "root";        
+$password = "";          
+$dbname = "sw_project";       
 
 
 // Create connection

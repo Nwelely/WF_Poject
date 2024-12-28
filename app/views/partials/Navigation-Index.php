@@ -18,6 +18,7 @@
       <a href="http://localhost/WF_Poject/app/views/shop.php">Shop</a>
       <a href="http://localhost/WF_Poject/app/views/contact.php">Contact</a>
       <a href="http://localhost/WF_Poject/app/views/plans-index.php">Join Us</a>
+      <a id="profile-link" href="http://localhost/WF_Poject/app/views/Profile.php">My Profile</a>
 
       <?php 
       // If user is logged in and role is admin, hide login and signup links
@@ -28,7 +29,7 @@
           <a id="logout-link" href="http://localhost/WF_Poject/app/views/logout.php">Logout</a>
         <?php } else { ?>
           <!-- If user is a regular user -->
-          <a id="profile-link" href="http://localhost/WF_Poject/app/views/Profile.php">My Profile</a>
+      
           <a id="logout-link" href="http://localhost/WF_Poject/app/views/logout.php">Logout</a>
         <?php } ?>
       <?php } else { ?>

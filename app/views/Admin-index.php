@@ -49,7 +49,13 @@ $action = $_GET['action'] ?? null;
                             <th>ID</th>
                             <th>Full Name</th>
                             <th>Username</th>
+                            <th>Phone</th>
                             <th>Email</th>
+                            <th>Role</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Adress</th>
+                             <th>Subscribtion</th>
                             <th>Actions</th>
                         </tr>";
                 foreach ($users as $u) {
@@ -57,7 +63,13 @@ $action = $_GET['action'] ?? null;
                             <td>{$u['id']}</td>
                             <td>{$u['fullname']}</td>
                             <td>{$u['username']}</td>
+                            <td>{$u['userphone']}</td>
                             <td>{$u['useremail']}</td>
+                            <td>{$u['role']}</td>
+                            <td>{$u['gender']}</td>
+                            <td>{$u['age']}</td>
+                            <td>{$u['address']}</td>
+                            <td>{$u['fullname']}</td>
                             <td>
                                 <a href='admin-index.php?action=view_user&id={$u['id']}'>View</a> |
                                 <a href='admin-index.php?action=edit_user&id={$u['id']}'>Edit</a> |
