@@ -78,8 +78,12 @@ $action = $_GET['action'] ?? null;
                         </tr>";
                 }
                 echo "</table>";
+                echo "<button onclick=\"window.location.href='SignUp-index.php?role=admin';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: left;'>Add Admin</button>";
+                echo "<button onclick=\"window.location.href='SignUp-index.php?role=user';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: right;'>Add User</button>";
             } else {
                 echo "No users found.";
+                echo "<button onclick=\"window.location.href='SignUp-index.php?role=admin';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: left;'>Add Admin</button>";
+                echo "<button onclick=\"window.location.href='SignUp-index.php?role=user';\" style='display: inline-block; padding: 10px 20px; margin-top: 30px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; float: right;'>Add User</button>";
             }
         } elseif ($action === 'view_user') {
             $userId = $_GET['id'] ?? null;
