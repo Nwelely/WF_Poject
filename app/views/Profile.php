@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../Controllers/UserProfileController.php';
 
 // Redirect if user is not logged in
