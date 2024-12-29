@@ -45,32 +45,6 @@
             $validationMessage = "<div class='validation-message'>Passwords do not match.</div>";
         }
 
-        // Handle file upload
-        $img = null;
-        $targetDir = "uploads/";
-
-        // Ensure the upload directory exists and is writable
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0755, true);
-        }
-
-        if (isset($_FILES['img']) && $_FILES['img']['error'] === 0) {
-            $imgPath = $targetDir . basename($_FILES['img']['name']);
-            $fileType = strtolower(pathinfo($imgPath, PATHINFO_EXTENSION));
-
-            // Validate file type (allow only images)
-            $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-            if (!in_array($fileType, $allowedTypes)) {
-                $validationMessage = "<div class='validation-message'>Invalid image file type. Only JPG, JPEG, PNG, and GIF are allowed.</div>";
-            } else {
-                if (!move_uploaded_file($_FILES['img']['tmp_name'], $imgPath)) {
-                    $validationMessage = "<div class='validation-message'>Failed to upload image.</div>";
-                } else {
-                    $img = $imgPath;
-                }
-            }
-        }
-
         // Check if the user already exists in the database
         if (empty($validationMessage)) {
             $checkUser = "SELECT * FROM users WHERE username=? OR useremail=? OR userphone=?";
@@ -95,20 +69,11 @@
                     // Get the ID of the newly inserted user
                     $user_id = $stmt->insert_id;
 
-                    // Create a cart for the new user
-                    $cart_sql = "INSERT INTO carts (user_id) VALUES (?)";
-                    $cart_stmt = $conn->prepare($cart_sql);
-                    $cart_stmt->bind_param("i", $user_id);
-                    $cart_stmt->execute();
-
                     // Redirect to login page after successful signup
                     header("Location: http://localhost/WF_Poject/app/views/Login-index.php");
                     exit();
                 } else {
                     $validationMessage = "<div class='validation-message'>Error: " . $conn->error . "</div>";
-                    if ($img) {
-                        unlink($img); // Remove the uploaded image if there's an error
-                    }
                 }
             }
         }
