@@ -41,7 +41,8 @@ input[type="text"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-#signup-gender {
+#signup-gender,
+#signup-role{
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -170,7 +171,8 @@ body.dark-mode input[type="text"],
 body.dark-mode input[type="password"],
 body.dark-mode input[type="email"],
 body.dark-mode input[type="number"],
-body.dark-mode #signup-gender {
+body.dark-mode #signup-gender,
+body.dark-mode #signup-role {
   background-color: #555; /* Darker input background */
   color: #ffffff; /* White text */
   

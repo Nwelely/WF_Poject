@@ -55,7 +55,6 @@ $action = $_GET['action'] ?? null;
                             <th>Gender</th>
                             <th>Age</th>
                             <th>Adress</th>
-                             <th>Subscribtion</th>
                             <th>Actions</th>
                         </tr>";
                 foreach ($users as $u) {
@@ -69,7 +68,6 @@ $action = $_GET['action'] ?? null;
                             <td>{$u['gender']}</td>
                             <td>{$u['age']}</td>
                             <td>{$u['address']}</td>
-                            <td>{$u['fullname']}</td>
                             <td>
                                 <a href='admin-index.php?action=view_user&id={$u['id']}'>View</a> |
                                 <a href='admin-index.php?action=edit_user&id={$u['id']}'>Edit</a> |
@@ -115,7 +113,6 @@ $action = $_GET['action'] ?? null;
                         $gender = $_POST['gender'];
                         $age = $_POST['age'];
                         $address = $_POST['address'];
-                        $subscription = $_POST['subscription'];
                         $result = $user->updateUser(
                             $userId,
                             $fullname,
@@ -127,8 +124,6 @@ $action = $_GET['action'] ?? null;
                             $gender,
                             $age,
                             $address,
-                            null,
-                            $subscription
                         );
                         echo $result;
                     } else {
@@ -142,7 +137,6 @@ $action = $_GET['action'] ?? null;
                                 <label>Gender:</label><input type='text' name='gender' value='{$userData['gender']}' required><br>
                                 <label>Age:</label><input type='number' name='age' value='{$userData['age']}' required><br>
                                 <label>Address:</label><input type='text' name='address' value='{$userData['address']}' required><br>
-                                <label>Subscription:</label><input type='text' name='subscription' value='{$userData['subscription']}' required><br>
                                 <button type='submit'>Update</button>
                               </form>";
                     }

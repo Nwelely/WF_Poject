@@ -35,9 +35,9 @@ class User {
     }
 
     // UPDATE: Update user details
-    public function updateUser($id, $fullname, $username, $password, $phone, $email, $role, $gender, $age, $address, $img, $subscription) {
+    public function updateUser($id, $fullname, $username, $password, $phone, $email, $role, $gender, $age, $address) {
         $sql = "UPDATE users 
-                SET fullname = ?, username = ?, userphone = ?, useremail = ?, role = ?, gender = ?, age = ?, address = ?, img = ?, subscription = ?";
+                SET fullname = ?, username = ?, userphone = ?, useremail = ?, role = ?, gender = ?, age = ?, address = ?";
 
         // Include password in the update if provided
         if (!empty($password)) {
@@ -48,9 +48,9 @@ class User {
         $stmt = $this->conn->prepare($sql);
 
         if (!empty($password)) {
-            $stmt->bind_param("sssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $img, $subscription, $password, $id);
+            $stmt->bind_param("sssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $password, $id);
         } else {
-            $stmt->bind_param("ssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $img, $subscription, $id);
+            $stmt->bind_param("ssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $id);
         }
 
         return $stmt->execute();

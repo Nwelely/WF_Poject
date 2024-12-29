@@ -40,8 +40,6 @@
         $gender = sanitizeInput($_POST['gender']);
         $age = sanitizeInput($_POST['age']);
         $address = sanitizeInput($_POST['address']);
-        $subscription = sanitizeInput($_POST['subscription']);
-
         // Check if passwords match
         if ($_POST['userpassword'] !== $_POST['confirm-password']) {
             $validationMessage = "<div class='validation-message'>Passwords do not match.</div>";
@@ -83,18 +81,15 @@
 
             if ($result->num_rows > 0) {
                 $validationMessage = "<div class='validation-message'>User already exists.</div>";
-                if ($img) {
-                    unlink($img); // Remove uploaded image if user exists
-                }
             } else {
                 // Hash the password before storing it
                 $hashedPassword = password_hash($userpassword, PASSWORD_DEFAULT);
 
                 // Insert user data into the database
-                $sql = "INSERT INTO users (fullname, username, userpassword, userphone, useremail, role, gender, age, address, img, subscription) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO users (fullname, username, userpassword, userphone, useremail, role, gender, age, address) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssssisss", $fullname, $username, $hashedPassword, $userphone, $useremail, $role, $gender, $age, $address, $img, $subscription);
+                $stmt->bind_param("sssssssis", $fullname, $username, $hashedPassword, $userphone, $useremail, $role, $gender, $age, $address);
 
                 if ($stmt->execute()) {
                     // Get the ID of the newly inserted user
@@ -143,13 +138,6 @@
 
                     <label for="signup-address">Address:</label>
                     <input type="text" id="signup-address" name="address" required>
-
-                    <label for="signup-role">Role:</label>
-                    <select id="signup-role" name="role" required>
-                        <option value="">Select</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
                 </div>
 
                 <div class="right-column">
@@ -169,14 +157,11 @@
                     <label for="confirm-password">Confirm Password:</label>
                     <input type="password" id="confirm-password" name="confirm-password" required>
 
-                    <label for="signup-img">Profile Image:</label>
-                    <input type="file" id="signup-img" name="img" accept="image/*">
-
-                    <label for="signup-subscription">Subscription:</label>
-                    <select id="signup-subscription" name="subscription" required>
+                    <label for="signup-role">Role:</label>
+                    <select id="signup-role" name="role" required>
                         <option value="">Select</option>
-                        <option value="free">Free</option>
-                        <option value="premium">Premium</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
                     </select>
                 </div>
             </div>
