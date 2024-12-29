@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: Login-index.php"); // Redirect to login if not logged in
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +49,7 @@ session_start();
             </div>
         </div>
 
-        <form action="/auth/add-card" method="POST" onsubmit="return validateCreditCard()">
+        <form action="../../app/Controllers/paymentcontroller.php" method="POST" onsubmit="return validateCreditCard()">
             <?php if (!empty($cards)) { ?>
                 <div class="inputBox">
                     <span>Select an existing card or add a new card</span>

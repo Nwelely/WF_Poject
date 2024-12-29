@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../../public/css/Plans-Style.css">
 </head>
-
+<? session_start(); ?>
 <body>
     <?php include('partials/Navigation-Index.php'); ?>
 
@@ -21,7 +21,7 @@
             <ul>
                 <li>No personalized trainer</li>
             </ul>
-            <form action="../../app/views/paymentofjoinus.php" method="POST">
+            <form action="../../app/views/Payment.php" method="POST">
                 <input type="hidden" name="plan" value="Free Plan">
                 <button type="submit" class="subscribebtn" id="subscribebtn1">Subscribe</button>
             </form>
@@ -33,7 +33,7 @@
             <ul>
                 <li>Personalized trainer</li>
             </ul>
-            <form action="../../app/views/paymentofjoinus.php" method="POST">
+            <form action="../../app/views/Payment.php" method="POST">
                 <input type="hidden" name="plan" value="Standard Plan">
                 <button type="submit" class="subscribebtn" id="subscribebtn2">Subscribe</button>
             </form>
@@ -45,7 +45,7 @@
             <ul>
                 <li>Personalized trainer with a health consultant </li>
             </ul>
-            <form action="../../app/views/paymentofjoinus.php" method="POST">
+            <form action="../../app/views/Payment.php" method="POST">
                 <input type="hidden" name="plan" value="Premium Plan">
                 <button type="submit" class="subscribebtn" id="subscribebtn3">Subscribe</button>
             </form>
