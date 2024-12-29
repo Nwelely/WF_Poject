@@ -19,9 +19,7 @@
             <h2>Free Plan</h2>
             <p>$0/month</p>
             <ul>
-                <li>Access to basic features</li>
-                <li>Limited workouts</li>
-                <li>No personalized plans</li>
+                <li>No personalized trainer</li>
             </ul>
             <form action="../../app/views/paymentofjoinus.php" method="POST">
                 <input type="hidden" name="plan" value="Free Plan">
@@ -33,9 +31,7 @@
             <h2>Standard Plan</h2>
             <p>$10/month</p>
             <ul>
-                <li>Access to all features</li>
-                <li>Full access to workouts</li>
-                <li>Personalized plans</li>
+                <li>Personalized trainer</li>
             </ul>
             <form action="../../app/views/paymentofjoinus.php" method="POST">
                 <input type="hidden" name="plan" value="Standard Plan">
@@ -47,9 +43,7 @@
             <h2>Premium Plan</h2>
             <p>$20/month</p>
             <ul>
-                <li>Access to all features</li>
-                <li>Full access to workouts</li>
-                <li>Personalized plans with trainer support</li>
+                <li>Personalized trainer with a health consultant </li>
             </ul>
             <form action="../../app/views/paymentofjoinus.php" method="POST">
                 <input type="hidden" name="plan" value="Premium Plan">
