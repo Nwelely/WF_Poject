@@ -57,39 +57,13 @@ include '../DB/DB.php'; // Include your database connection
       <button onclick="togglePopup()" id="close_quick_test_button">X</button>
     </div>
 
-    <section class="cards services" id="services">
-      <h2 class="title">Services</h2>
-      <div class="content">
-        <div class="card" id="coachescard" onclick="redirectToCoachesPage()">
-          <div class="icon">
-            <img src="../public/images/coachphoto.jpeg" class="coachimage" />
-          </div>
-          <div class="coachcard">
-            <h3>Coaches</h3>
-            <p>
-              Meet our team of dedicated coaches, ready to personalize your
-              fitness journey and guide you to success at WEB-FIT
-            </p>
-          </div>
-        </div>
+   
 
-        <div class="card" id="membershipCard">
-          <div class="icon">
-            <img src="../public/images/planss.jpeg" class="plansimage" />
-          </div>
-          <div class="info">
-            <h3>Membership Plans</h3>
-            <p>
-              Offer individuals comprehensive support and guidance to achieve
-              their fitness goals through tailored exercise routines, dietary
-              advice, and structured meal plans
-            </p>
-          </div>
-        </div>
+       
 
         <div class="card" id="shopcard">
           <div class="icon">
-            <img src="../public/images/shop.jpeg" class="shopimage" />
+            <img src="../../public/uploads/shopimage.jpg" class="shopimage" />
           </div>
           <div class="shopcard">
             <h3>Shop Products</h3>
