@@ -48,9 +48,9 @@ class User {
         $stmt = $this->conn->prepare($sql);
 
         if (!empty($password)) {
-            $stmt->bind_param("sssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $password, $id);
+            $stmt->bind_param("sssssssisi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $password, $id);
         } else {
-            $stmt->bind_param("ssssssisssi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $id);
+            $stmt->bind_param("ssssssisi", $fullname, $username, $phone, $email, $role, $gender, $age, $address, $id);
         }
 
         return $stmt->execute();
