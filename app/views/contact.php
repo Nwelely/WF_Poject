@@ -22,7 +22,7 @@ session_start();
       </div>
       <div class="submit-form">
         <h4 class="text3">Contact Us</h4>
-        <form action="handle_contact.php" method="POST">
+        <form action="../../app/views/index.php" method="POST">
           <div class="inputbox">
             <textarea name="message" class="input" required id="message" cols="30" rows="10"></textarea>
             <label for="message">Write your message here</label>
